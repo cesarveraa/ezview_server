@@ -8,6 +8,8 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 from dotenv import load_dotenv
 import os
+from fastapi.middleware.cors import CORSMiddleware
+
 # 1) Carga variables de entorno
 load_dotenv()
 
@@ -31,7 +33,15 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 app = FastAPI(title="EzTo IoT-Backend")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+    "*"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ─── MODELOS MEMBER ─────────────────────────────────────────────────────────────
 
 class MemberBase(BaseModel):
