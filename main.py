@@ -1,19 +1,34 @@
 # main.py
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, EmailStr
-from typing import List, Optional
-from uuid import uuid4
-from datetime import datetime
+import os
+from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials, firestore
+from fastapi import FastAPI, HTTPException
+# … resto de imports …
 
-# 1) Inicializar Firebase Admin SDK
-cred = credentials.Certificate("serviceAccountKey.json")
+# 1) Carga variables de entorno
+load_dotenv()
+
+# 2) Construye el dict de credenciales
+service_account = {
+    "type":                        os.getenv("FIREBASE_TYPE"),
+    "project_id":                  os.getenv("FIREBASE_PROJECT_ID"),
+    "private_key_id":              os.getenv("FIREBASE_PRIVATE_KEY_ID"),
+    "private_key":                 os.getenv("FIREBASE_PRIVATE_KEY").replace('\\n', '\n'),
+    "client_email":                os.getenv("FIREBASE_CLIENT_EMAIL"),
+    "client_id":                   os.getenv("FIREBASE_CLIENT_ID"),
+    "auth_uri":                    os.getenv("FIREBASE_AUTH_URI"),
+    "token_uri":                   os.getenv("FIREBASE_TOKEN_URI"),
+    "auth_provider_x509_cert_url": os.getenv("FIREBASE_AUTH_PROVIDER_CERT_URL"),
+    "client_x509_cert_url":        os.getenv("FIREBASE_CLIENT_CERT_URL"),
+}
+
+# 3) Inicializar Firebase Admin
+cred = credentials.Certificate(service_account)
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 app = FastAPI(title="EzTo IoT-Backend")
-
 
 # ─── MODELOS MEMBER ─────────────────────────────────────────────────────────────
 
