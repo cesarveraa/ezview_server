@@ -1,10 +1,11 @@
 # main.py
-import os
-from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, EmailStr
+from typing import List, Optional
+from uuid import uuid4
+from datetime import datetime
 import firebase_admin
 from firebase_admin import credentials, firestore
-from fastapi import FastAPI, HTTPException
-# … resto de imports …
 
 # 1) Carga variables de entorno
 load_dotenv()

@@ -1,0 +1,154 @@
+{
+  "info": {
+    "name": "EzView API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://ezview-server.vercel.app"
+    },
+    {
+      "key": "member_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "List Members",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/members/",
+          "host": ["{{base_url}}"],
+          "path": ["members", ""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Member",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Ana\",\n  \"last_name\": \"Pérez\",\n  \"email\": \"ana@example.com\",\n  \"password\": \"secreto123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/",
+          "host": ["{{base_url}}"],
+          "path": ["members", ""]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Member",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Member",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Ana María\",\n  \"last_name\": \"Gómez\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Member",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register IoT Device",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"device_id\": \"esp32-pulsera-01\",\n  \"location\": \"pulsera mano derecha\",\n  \"created_at\": \"2025-05-18T08:15:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/iot_devices",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "iot_devices"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register App Device",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"location\": \"app\",\n  \"share_camera\": true,\n  \"exercise_variants\": [\"curl_palma_arriba\", \"curl_martillo\"],\n  \"created_at\": \"2025-05-18T08:16:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/app_devices",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "app_devices"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
