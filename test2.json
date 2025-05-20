@@ -1,0 +1,293 @@
+{
+  "info": {
+    "name": "EzView Full CRUD Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://ezview-server.vercel.app"
+    },
+    {
+      "key": "member_id",
+      "value": ""
+    },
+    {
+      "key": "iot_doc_id",
+      "value": ""
+    },
+    {
+      "key": "app_doc_id",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Member",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "pm.environment.set('member_id', data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Test\",\n  \"last_name\":  \"User\",\n  \"email\":      \"testuser@example.com\",\n  \"password\":   \"password123\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members",
+          "host": ["{{base_url}}"],
+          "path": ["members"]
+        }
+      }
+    },
+    {
+      "name": "List Members",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members",
+          "host": ["{{base_url}}"],
+          "path": ["members"]
+        }
+      }
+    },
+    {
+      "name": "Get Member",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Update Member",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"first_name\": \"Updated\",\n  \"last_name\":  \"Tester\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Delete Member",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Register IoT Device",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "pm.environment.set('iot_doc_id', data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"device_id\":  \"esp32-pulsera-01\",\n  \"location\":   \"pulsera mano derecha\",\n  \"created_at\": \"2025-05-18T08:15:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/iot_devices",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "iot_devices"]
+        }
+      }
+    },
+    {
+      "name": "List IoT Devices",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/iot_devices",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "iot_devices"]
+        }
+      }
+    },
+    {
+      "name": "Get IoT Device",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/iot_devices/{{iot_doc_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "iot_devices", "{{iot_doc_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Update IoT Device",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"location\": \"muñeca izquierda\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/iot_devices/{{iot_doc_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "iot_devices", "{{iot_doc_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Delete IoT Device",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/iot_devices/{{iot_doc_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "iot_devices", "{{iot_doc_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Register App Device",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "pm.environment.set('app_doc_id', data.id);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"location\":           \"app\",\n  \"share_camera\":       true,\n  \"exercise_variants\":  [\"curl_palma_arriba\",\"curl_martillo\"],\n  \"created_at\":         \"2025-05-18T08:16:00Z\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/app_devices",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "app_devices"]
+        }
+      }
+    },
+    {
+      "name": "List App Devices",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/app_devices",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "app_devices"]
+        }
+      }
+    },
+    {
+      "name": "Get App Device",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/app_devices/{{app_doc_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "app_devices", "{{app_doc_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Update App Device",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"share_camera\": false,\n  \"location\":      \"thumb strap\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/app_devices/{{app_doc_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "app_devices", "{{app_doc_id}}"]
+        }
+      }
+    },
+    {
+      "name": "Delete App Device",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/members/{{member_id}}/app_devices/{{app_doc_id}}",
+          "host": ["{{base_url}}"],
+          "path": ["members", "{{member_id}}", "app_devices", "{{app_doc_id}}"]
+        }
+      }
+    }
+  ]
+}
